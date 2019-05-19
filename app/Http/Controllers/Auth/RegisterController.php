@@ -55,7 +55,6 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'profile_image' => ['required','image','mimes:jpg,png,jpeg'],
             'status' => ['required', 'string', 'max:255'],
             'email_token' => base64_encode($data['email']),
         ]);
@@ -69,18 +68,11 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $profileImage = $data['profile_image'];
-        $profileImageSaveAsName = time() . $data['email']. ".".
-                                  $profileImage->getClientOriginalExtension();
-        $upload_path = 'profile_images/user/';
-        $profile_image_url = $upload_path . $profileImageSaveAsName;
-        $success = $profileImage->move($upload_path, $profileImageSaveAsName);
-
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'profile_image' => $profile_image_url,
+            'profile_image' => null,
             'status' => $data['status'],
         ]);
         $user->sendEmailVerificationNotification();
