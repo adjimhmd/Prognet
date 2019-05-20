@@ -21,6 +21,7 @@ class AuthController extends Controller
         if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){
             $user = Auth::user();
             $success['token'] =  $user->createToken('nApp')->accessToken;
+            $success['name'] =  $user->name;
             return response()->json(['success' => $success], $this->successStatus);
         }
         else{
