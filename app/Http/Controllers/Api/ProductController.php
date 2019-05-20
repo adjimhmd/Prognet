@@ -39,7 +39,7 @@ class ProductController extends Controller
             ->join('product_categories', 'product_category_details.category_id', '=', 'product_categories.id')
             ->select('products.id', 'products.product_name', 'products.description', 'product_categories.category_name')
             ->get();
-return $product;
+        return $product;
         return view('auth-admin.product.index', compact('product'));
     }
 
