@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Api;
 
 use DB;
 use App\Product;
@@ -12,15 +12,6 @@ use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth:admin');
-    }
 
     /**
      * Display a listing of the resource.
@@ -29,11 +20,11 @@ class ProductController extends Controller
      */
     public function index()
     {
-
         // $product = DB::table('products')
         //     ->join('product_images', 'products.id', '=', 'product_images.product_id')
         //     ->select('product_name', 'price', 'description', 'image_name')
         //     ->get();
+        // return $product;
         // foreach ($product as $key => $new) {
         //     $data[$key] = [
         //         'product_name' => $new->product_name,
@@ -48,7 +39,7 @@ class ProductController extends Controller
             ->join('product_categories', 'product_category_details.category_id', '=', 'product_categories.id')
             ->select('products.id', 'products.product_name', 'products.description', 'product_categories.category_name')
             ->get();
-
+return $product;
         return view('auth-admin.product.index', compact('product'));
     }
 

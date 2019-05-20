@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use DB;
+use Response;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
@@ -27,9 +30,12 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
+        // return response()->json($request->all());
+        //return Response::json(Input::get('name'));
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email',
+            'status' => 'required',
             'password' => 'required',
             'c_password' => 'required|same:password',
         ]);
@@ -44,7 +50,7 @@ class AuthController extends Controller
         $success['token'] =  $user->createToken('nApp')->accessToken;
         $success['name'] =  $user->name;
 
-        return response()->json(['success'=>$success], $this->successStatus);
+        return response()->json(['success'=>$user], $this->successStatus);
     }
 
     public function logout (Request $request) {
@@ -55,5 +61,15 @@ class AuthController extends Controller
         $response = 'You have been succesfully logged out!';
         return response($response, 200);
 
+    }
+
+    public function home(){
+        $product = DB::table('products')
+            ->join('product_images', 'products.id', '=', 'product_images.product_id')
+            ->join('product_images', 'products.id', '=', 'product_images.product_id')
+            ->select('*')
+            ->get();
+            
+        return $product;
     }
 }

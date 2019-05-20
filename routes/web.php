@@ -30,4 +30,5 @@ Route::prefix('admin')->group(function() {
 	Route::resource('/product', 'Admin\ProductController');
 	Route::get('/gambar', 'Admin\ProductController@gambar');
 	Route::post('/gambar', 'Admin\ProductController@gambarUpload');
+	Route::get('/transaction', 'Admin\TransactionController@index');
 });
