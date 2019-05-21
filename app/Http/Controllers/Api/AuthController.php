@@ -21,6 +21,8 @@ class AuthController extends Controller
         if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){
             $user = Auth::user();
             $success['token'] =  $user->createToken('nApp')->accessToken;
+            $success['isEmailVerified'] = true;
+            $success['isAuthenticated'] = true;
             $success['name'] =  $user->name;
             return response()->json(['success' => $success], $this->successStatus);
         }
@@ -49,6 +51,8 @@ class AuthController extends Controller
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
         $success['token'] =  $user->createToken('nApp')->accessToken;
+        $success['isEmailVerified'] = false;
+        $success['isAuthenticated'] = true;
         $success['name'] =  $user->name;
 
         return response()->json(['success'=>$user], $this->successStatus);
