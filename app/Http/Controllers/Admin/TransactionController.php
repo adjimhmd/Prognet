@@ -28,7 +28,7 @@ class TransactionController extends Controller
         $transaction = Transaction::get();
         $dtl_transaction = Transaction::get();
         // return $transaction;
-        return view('auth-admin.transaction.index', compact('transaction','dtl_transaction'));
+        return view('auth-admin.transaction.index',compact('transaction'));
     }
 
     /**

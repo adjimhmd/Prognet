@@ -20,6 +20,7 @@ class AuthController extends Controller
     public function login(){
         if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){
             $user = Auth::user();
+            // return $user;
             $success['token'] =  $user->createToken('nApp')->accessToken;
             return response()->json(['success' => $success], $this->successStatus);
         }
@@ -49,8 +50,9 @@ class AuthController extends Controller
         $user = User::create($input);
         $success['token'] =  $user->createToken('nApp')->accessToken;
         $success['name'] =  $user->name;
-
-        return response()->json(['success'=>$user], $this->successStatus);
+        $user->sendEmailVerificationNotification();
+        return $user;
+        // return response()->json(['success'=>$user], $this->successStatus);
     }
 
     public function logout (Request $request) {
@@ -71,5 +73,10 @@ class AuthController extends Controller
             ->get();
             
         return $product;
+    }
+
+    public function details(){
+        $user = DB::table('users')->select('email_verified_at')->get(); 
+        return $user;
     }
 }

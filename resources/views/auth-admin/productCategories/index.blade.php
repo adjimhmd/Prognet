@@ -41,7 +41,7 @@
 								<tr>
 									<th width="5%"><center>No</center></th>
 									<th><center>Nama Kategori Produk</center></th>
-									<th width="10%"><center>Aksi</center></th>
+									<th width="11%"><center>Aksi</center></th>
 								</tr>
 							</thead>
 							<tbody>
