@@ -20,9 +20,13 @@ class AuthController extends Controller
     public function login(){
         if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){
             $user = Auth::user();
-            // return $user;
+            if (is_null($user->email_verified_at)) {
+                $success['isEmailVerified'] = false;
+            }
+            else{
+                $success['isEmailVerified'] = true;
+            }
             $success['token'] =  $user->createToken('nApp')->accessToken;
-            $success['isEmailVerified'] = true;
             $success['isAuthenticated'] = true;
             $success['name'] =  $user->name;
             return response()->json(['success' => $success], $this->successStatus);
