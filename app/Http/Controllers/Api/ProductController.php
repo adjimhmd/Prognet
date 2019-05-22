@@ -30,27 +30,29 @@ class ProductController extends Controller
      */
     public function index()
     {
-        // $product = DB::table('products')
-        //     ->join('product_images', 'products.id', '=', 'product_images.product_id')
-        //     ->select('product_name', 'price', 'description', 'image_name')
+        $product = DB::table('products')
+            ->join('product_images', 'products.id', '=', 'product_images.product_id')
+            ->select('product_name', 'price', 'description', 'image_name')
+            ->get();
+        // return $product;
+        foreach ($product as $key => $new) {
+            $data[$key] = [
+                'image' => $new->image_name,
+                'product' => $new->product_name,
+                'price' => $new->price,
+                'desc' => $new->description,
+                'quantity' => 0,
+            ];
+        }
+        return $data;
+        
+        // $product = DB::table('product_category_details')
+        //     ->join('products', 'product_category_details.product_id', '=', 'products.id')
+        //     ->join('product_categories', 'product_category_details.category_id', '=', 'product_categories.id')
+        //     ->select('products.id', 'products.product_name', 'products.description', 'product_categories.category_name')
         //     ->get();
         // return $product;
-        // foreach ($product as $key => $new) {
-        //     $data[$key] = [
-        //         'product_name' => $new->product_name,
-        //         'description' => $new->description,
-        //         'quantity' => 0,
-        //     ];
-        // }
-        // return $data;
-        
-        $product = DB::table('product_category_details')
-            ->join('products', 'product_category_details.product_id', '=', 'products.id')
-            ->join('product_categories', 'product_category_details.category_id', '=', 'product_categories.id')
-            ->select('products.id', 'products.product_name', 'products.description', 'product_categories.category_name')
-            ->get();
-        return $product;
-        return view('auth-admin.product.index', compact('product'));
+        // return view('auth-admin.product.index', compact('product'));
     }
 
     /**
