@@ -6,6 +6,8 @@ use App\ProductCategories;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
+use DB;
+use Redirect;
 
 class ProductCategoriesController extends Controller
 {
@@ -104,7 +106,16 @@ class ProductCategoriesController extends Controller
      */
     public function destroy($id)
     {
-        ProductCategories::find($id)->delete();
-        return redirect()->route('product_categories.index');
+        $product = DB::table('product_category_details')
+        ->where('category_id','=',$id)
+        ->first();
+        if (is_null($product)) {
+            ProductCategories::find($id)->delete();
+            return redirect()->route('product_categories.index');
+        }
+        else{
+            // Alert::error('Master kategori digunakan pada produk', 'Gagal Hapus');
+            return redirect()->back()->with('error', 'Master kategori digunakan pada produk');
+        }
     }
 }

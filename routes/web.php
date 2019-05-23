@@ -28,7 +28,8 @@ Route::prefix('admin')->group(function() {
 	Route::post('/register', 'AuthAdmin\RegisterController@register')->name('admin.register.submit');
 	Route::resource('/product_categories', 'Admin\ProductCategoriesController');
 	Route::resource('/product', 'Admin\ProductController');
+	Route::resource('/courier', 'Admin\CourierController');
+	Route::resource('/transaction', 'Admin\TransactionController@index');
 	Route::get('/gambar', 'Admin\ProductController@gambar');
 	Route::post('/gambar', 'Admin\ProductController@gambarUpload');
-	Route::get('/transaction', 'Admin\TransactionController@index');
 });

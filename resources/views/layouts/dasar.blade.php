@@ -20,6 +20,7 @@
     <link href="{{asset('assets/plugins/datatables/responsive.bootstrap4.min.css')}}" rel="stylesheet" type="text/css">
     <!-- Dropzone css -->
     <link href="{{asset('assets/plugins/dropzone/dist/dropzone.css')}}" rel="stylesheet" type="text/css">
+    
     <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('assets/css/icons.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet" type="text/css">
@@ -356,6 +357,7 @@
         <!-- End Right content here -->
     </div>
     <!-- END wrapper -->
+    @yield('js')
     <!-- jQuery  -->
     <script src="{{asset('assets/js/jquery.min.js')}}"></script>
     <script src="{{asset('assets/js/bootstrap.bundle.min.js')}}"></script>

@@ -40,8 +40,7 @@
 							<thead>
 								<tr>
 									<th width="5%"><center>No</center></th>
-									<th><center>Nama Produk</center></th>
-									<th><center>Kategori Produk</center></th>
+									<th width="25%"><center>Nama Produk</center></th>
 									<th><center>Deskripsi Produk</center></th>
 									<th width="16%"><center>Aksi</center></th>
 								</tr>
@@ -52,7 +51,6 @@
 								<tr>
 									<td>{{$no++}}</td>
 									<td>{{$data->product_name}}</td>
-									<td>{{$data->category_name}}</td>
 									<td>{{$data->description}}</td>
 									<td>
 										<form action="{{ route('product.destroy',$data->id) }}" method="POST">

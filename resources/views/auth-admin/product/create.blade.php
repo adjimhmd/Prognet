@@ -45,8 +45,13 @@
 						<div class="form-group row">
 							<label for="example-text-input" class="col-sm-2 col-form-label">
 							Nama Produk</label>
-							<div class="col-sm-10">
+							<div class="col-sm-4">
 								<input class="form-control" type="text" name="product_name" id="example-text-input" required="" placeholder="Type something">
+							</div>
+							<label for="example-text-input" class="col-sm-2 col-form-label">
+							Harga</label>
+							<div class="col-sm-4">
+								<input class="form-control" type="text" name="price" id="example-text-input" data-parsley-type="number" required data-parsley-min="1" required="" placeholder="Enter only numbers">
 							</div>
 						</div>
 						<div class="form-group row">
@@ -58,39 +63,38 @@
 						</div>
 						<div class="form-group row">
 							<label for="example-text-input" class="col-sm-2 col-form-label">
-							Harga</label>
-							<div class="col-sm-4">
-								<input class="form-control" type="text" name="price" id="example-text-input" data-parsley-type="number" required="" placeholder="Enter only numbers">
-							</div>
-							<label for="example-text-input" class="col-sm-2 col-form-label">
-							Kategori</label>
-							<div class="col-sm-4">
-								<select class="custom-select" name="id_category">
-									<option selected="selected" disabled="">Open this select menu</option>
-									@foreach($kategori as $data)
-									<option value="{{$data->id}}">{{$data->category_name}}</option>
-									@endforeach
-								</select>
-							</div>
-						</div>
-						<div class="form-group row">
-							<label for="example-text-input" class="col-sm-2 col-form-label">
 							Stok</label>
 							<div class="col-sm-4">
-								<input class="form-control" type="number" placeholder="0" name="stock" id="example-number-input">
+								<input class="form-control" type="number" placeholder="0" name="stock" id="example-number-input" required data-parsley-min="0">
 							</div>
 							<label for="example-text-input" class="col-sm-2 col-form-label">
 							Berat</label>
 							<div class="col-sm-4">
-								<input class="form-control" type="number" placeholder="0" name="weight" id="example-number-input">
+								<input class="form-control" type="number" placeholder="0" name="weight" id="example-number-input" required data-parsley-min="0">
 							</div>
 						</div>
 						<div class="form-group row">
 							<label for="example-text-input" class="col-sm-2 col-form-label">
+							Kategori</label>
+							<div class="col-sm-10">
+								@foreach($kategori as $data)
+								<div class="custom-control custom-checkbox mb-3">
+									<input type="checkbox" name="category_id[]" class="custom-control-input" id="{{$data->id}}" value="{{$data->id}}">
+									<label class="custom-control-label" for="{{$data->id}}">
+									{{$data->category_name}}</label>
+								</div>
+								@endforeach
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="inputHorizontalSuccess" class="col-sm-2 col-form-label">
 							Gambar</label>
 							<div class="col-sm-10">
-								<input type="file" name="gambar[]" class="form-control" multiple="multiple">
-								{{-- <a class="btn btn-outline-info waves-effect waves-light btn-sm" href="/admin/gambar" role="button">Pilih File</a>	 --}}
+								{{-- <input type="file" name="gambar[]" class="form-control" multiple="multiple"> --}}
+								<input type="text" class="form-control" id="inputHorizontalSuccess" placeholder="link...">
+								<small class="form-text">
+									<a href="https://www.w3schools.com/html/">{{ __('Klik untuk mendapatkan URL gambar') }}</a>
+								</small>
 							</div>
 						</div>
 						<div>

@@ -43,12 +43,7 @@ class ProductController extends Controller
         // }
         // return $data;
         
-        $product = DB::table('product_category_details')
-            ->join('products', 'product_category_details.product_id', '=', 'products.id')
-            ->join('product_categories', 'product_category_details.category_id', '=', 'product_categories.id')
-            ->select('products.id', 'products.product_name', 'products.description', 'product_categories.category_name')
-            ->get();
-
+        $product = Product::all();
         return view('auth-admin.product.index', compact('product'));
     }
 
@@ -80,9 +75,12 @@ class ProductController extends Controller
         $product->save();
 
         $id_product = $product->id;
-        DB::table('product_category_details')->insert(
-            ['product_id' => $id_product, 'category_id' => $request->id_category, 'created_at' =>  \Carbon\Carbon::now(), 'updated_at' => \Carbon\Carbon::now()]
-        );
+        $loop = $request->get('category_id');
+        foreach ($loop as $value){
+            DB::table('product_category_details')->insert(
+                ['product_id' => $id_product, 'category_id' => $value, 'created_at' =>  \Carbon\Carbon::now(), 'updated_at' => \Carbon\Carbon::now()]
+            );
+        }
 
         $this->validate($request, [
                 'gambar' => 'required',
@@ -108,7 +106,7 @@ class ProductController extends Controller
             }
 
          }
-        return redirect()->route('product.index');
+        return redirect()->route('auth-admin.product.index');
     }
 
     /**
@@ -121,12 +119,12 @@ class ProductController extends Controller
     {
         $product = Product::where('id', $id)->first();
         // $product_category_details = App\ProductCategoryDetail::where('product_id', $id)->first();
-        $product_images = ProductImage::where('product_id', $id)->get();
+        $product_images = ProductImage::where('product_id', $id)->first();
         $product_category_details = DB::table('product_category_details')
-            ->select('product_categories.category_name')
             ->where('product_category_details.product_id', $id)
             ->join('product_categories', 'product_category_details.category_id', '=', 'product_categories.id')
-            ->first();
+            ->select('product_categories.category_name')
+            ->get();
         return view('auth-admin.product.show', compact('product','product_category_details','product_images'));
     }
 

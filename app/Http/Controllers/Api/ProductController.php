@@ -32,7 +32,7 @@ class ProductController extends Controller
     {
         $product = DB::table('products')
             ->join('product_images', 'products.id', '=', 'product_images.product_id')
-            ->select('product_name', 'price', 'description', 'image_name')
+            ->select('product_name', 'price', 'description', 'image_name', 'weight')
             ->get();
         // return $product;
         foreach ($product as $key => $new) {
@@ -41,6 +41,7 @@ class ProductController extends Controller
                 'product' => $new->product_name,
                 'price' => $new->price,
                 'desc' => $new->description,
+                'weight' => $new->weight,
                 'quantity' => 0,
             ];
         }

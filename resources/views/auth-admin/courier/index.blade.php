@@ -1,6 +1,7 @@
 @extends('layouts.dasar')
 
 @section('content')
+
 <!-- Top Bar End -->
 <div class="page-content-wrapper">
 	<div class="container-fluid">
@@ -32,26 +33,26 @@
 						<h4 class="mt-0 header-title">
 						Daftar Kategori Produk</h4>
 						<br><div class="button-items">
-							<a class="btn btn-success" href="/admin/product_categories/create" role="button">
+							<a class="btn btn-success" href="/admin/courier/create" role="button">
 							Tambah Data</a>
 						</div><br>
 						<table id="datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
 							<thead>
 								<tr>
 									<th width="5%"><center>No</center></th>
-									<th><center>Nama Kategori Produk</center></th>
+									<th><center>Nama Kurir</center></th>
 									<th width="11%"><center>Aksi</center></th>
 								</tr>
 							</thead>
 							<tbody>
 								@php($no = 1)
-								@foreach ($productCategories as $data) 						    
+								@foreach ($courier as $data) 						    
 								<tr>
 									<td>{{$no++}}</td>
-									<td>{{$data->category_name}}</td>
+									<td>{{$data->courier}}</td>
 									<td>
-										<form action="{{ route('product_categories.destroy',$data->id) }}" method="POST">
-											<a class="btn btn-primary" href="{{ route('product_categories.edit',$data->id) }}"><i class="ti-marker-alt"></i></a>
+										<form action="{{ route('courier.destroy',$data->id) }}" method="POST">
+											<a class="btn btn-primary" href="{{ route('courier.edit',$data->id) }}"><i class="ti-marker-alt"></i></a>
 											@csrf
 											@method('DELETE')
 											<button type="submit" class="btn btn-danger"><i class="ti-trash"></i></button>
@@ -72,12 +73,4 @@
 	<!-- container fluid -->
 </div>
 <!-- Page content Wrapper -->
-@section('js')
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script>
-@if (session('error'))
-    swal("{{ session('error') }}");
-@endif
-</script>
-@endsection
 @endsection

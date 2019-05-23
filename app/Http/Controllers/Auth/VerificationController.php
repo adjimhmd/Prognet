@@ -68,6 +68,13 @@ class VerificationController extends Controller
 //     }
     
     /**
+     * Where to redirect users after registration.
+     *
+     * @var string
+     */
+    protected $redirectTo = '/login';
+    
+    /**
      * Create a new controller instance.
      *
      * @return void
