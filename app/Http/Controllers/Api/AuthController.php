@@ -60,8 +60,9 @@ class AuthController extends Controller
         $success['isAuthenticated'] = true;
         $success['name'] =  $user->name;
         $user->sendEmailVerificationNotification();
-        return $user;
-        // return response()->json(['success'=>$user], $this->successStatus);
+        $success['user'] = $user;
+        // return $user;
+        return response()->json(['success'=>$success], $this->successStatus);
     }
 
     public function logout (Request $request) {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\VerifiesEmails;
+use Illuminate\Support\Facades\Redirect;
 
 class VerificationController extends Controller
 {
@@ -72,7 +73,7 @@ class VerificationController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/login';
+    // protected $redirectTo = 'http://127.0.0.1:8080/login';
     
     /**
      * Create a new controller instance.
