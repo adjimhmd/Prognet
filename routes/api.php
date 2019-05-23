@@ -24,6 +24,7 @@ Route::group(['middleware' => ['json.response']], function () {
     // });
 
     // public routes
+    Route::get('/', function() {return "Oke";});
     Route::get('/user', 'Api\AuthController@home')->name('home.api');
     Route::post('/login', 'Api\AuthController@login')->name('login.api');
     Route::post('/register', 'Api\AuthController@register')->name('register.api');

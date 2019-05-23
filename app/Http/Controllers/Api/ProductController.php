@@ -20,7 +20,7 @@ class ProductController extends Controller
     public function __construct()
     {
         // $this->middleware('auth:web,admin,verified');
-        $this->middleware(['auth','verified']);
+        // $this->middleware(['auth','verified']);
     }
 
     /**
