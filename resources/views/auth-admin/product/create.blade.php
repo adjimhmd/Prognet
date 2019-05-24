@@ -10,19 +10,14 @@
 				<div class="float-right page-breadcrumb">
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item">
-							<a href="#">
-							Drixo</a>
+							<a href="/admin">
+							Home</a>
 						</li>
-						<li class="breadcrumb-item">
-							<a href="#">
-							Forms</a>
-						</li>
-						<li class="breadcrumb-item active">
-						Form Elements</li>
+						<li class="breadcrumb-item active">Produk</li>
 					</ol>
 				</div>
 				<h5 class="page-title">
-				Form Elements</h5>
+				Produk</h5>
 			</div>
 		</div>
 		<!-- end row -->
@@ -31,20 +26,12 @@
 				<div class="card m-b-30">
 					<div class="card-body">
 						<h4 class="mt-0 header-title">
-						Textual inputs</h4>
-						<p class="text-muted m-b-30 font-14">
-							Here are examples of <code class="highlighter-rouge">
-							.form-control</code>
-							applied to each textual HTML5 <code class="highlighter-rouge">
-							&lt;input&gt;</code>
-							<code class="highlighter-rouge">
-							type</code>
-						.</p>
+						Insert Produk</h4>
 						<form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
 						{{csrf_field()}}
 						<div class="form-group row">
 							<label for="example-text-input" class="col-sm-2 col-form-label">
-							Nama Produk</label>
+							Nama Produk</label><br>
 							<div class="col-sm-4">
 								<input class="form-control" type="text" name="product_name" id="example-text-input" required="" placeholder="Type something">
 							</div>
@@ -86,15 +73,22 @@
 								@endforeach
 							</div>
 						</div>
-						<div class="form-group row">
+						{{-- <div class="form-group row">
 							<label for="inputHorizontalSuccess" class="col-sm-2 col-form-label">
 							Gambar</label>
 							<div class="col-sm-10">
-								{{-- <input type="file" name="gambar[]" class="form-control" multiple="multiple"> --}}
+								<input type="file" name="gambar[]" class="form-control" multiple="multiple">
 								<input type="text" class="form-control" id="inputHorizontalSuccess" placeholder="link...">
 								<small class="form-text">
 									<a href="https://www.w3schools.com/html/">{{ __('Klik untuk mendapatkan URL gambar') }}</a>
 								</small>
+							</div>
+						</div> --}}
+						<div class="form-group row">
+							<label for="inputHorizontalSuccess" class="col-sm-2 col-form-label">
+							Gambar</label>
+							<div class="col-sm-10">
+								 <input type="file" class="form-control-file border" name="image_name[]" multiple=""> 
 							</div>
 						</div>
 						<div>

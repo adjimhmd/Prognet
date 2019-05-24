@@ -10,15 +10,10 @@
 				<div class="float-right page-breadcrumb">
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item">
-							<a href="#">
-							Drixo</a>
+							<a href="/admin">
+							Home</a>
 						</li>
-						<li class="breadcrumb-item">
-							<a href="#">
-							Tables</a>
-						</li>
-						<li class="breadcrumb-item active">
-						Datatable</li>
+						<li class="breadcrumb-item active">Produk</li>
 					</ol>
 				</div>
 				<h5 class="page-title">

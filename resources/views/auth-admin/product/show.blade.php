@@ -10,19 +10,14 @@
 				<div class="float-right page-breadcrumb">
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item">
-							<a href="#">
-							Drixo</a>
+							<a href="/admin">
+							Home</a>
 						</li>
-						<li class="breadcrumb-item">
-							<a href="#">
-							Forms</a>
-						</li>
-						<li class="breadcrumb-item active">
-						Form Elements</li>
+						<li class="breadcrumb-item active">Produk</li>
 					</ol>
 				</div>
 				<h5 class="page-title">
-				Form Elements</h5>
+				Produk</h5>
 			</div>
 		</div>
 		<!-- end row -->
@@ -30,7 +25,7 @@
 			<div class="col-12">
 				<div class="card m-b-30">
 					<div class="card-body">
-						<h4 class="mt-0 header-title">Basic example</h4>
+						<h4 class="mt-0 header-title">Detail Produk</h4>
 							<div class="table-responsive">
 								<table class="table mb-0">
 									<tbody>
@@ -65,7 +60,9 @@
 										<tr>
 											<td width="25%">Gambar Produk</td>
 											<td>
-												<img class="rounded mr-2" alt="200x200" style="width: 200px; margin: 5px;" src="{{asset('assets/images/small/img-4.jpg')}}" data-holder-rendered="true">
+												@foreach($product_images as $image)
+												<img class="rounded mr-2" alt="200x200" style="width: 200px; margin: 5px;" src="{{asset($image->image_name)}}" data-holder-rendered="true">
+												@endforeach
 											</td>
 										</tr>
 										<tr>

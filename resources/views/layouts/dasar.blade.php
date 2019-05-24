@@ -110,6 +110,15 @@
                                 </span>
                             </a>
                         </li>
+                        <li>
+                            <a href="/admin/report" class="waves-effect">
+                                <i class="ion-arrow-graph-up-right">
+                                </i>
+                                <span>
+                                    Laporan
+                                </span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <div class="clearfix">

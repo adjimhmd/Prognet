@@ -56,15 +56,6 @@
                                                     <input class="form-control" type="password" required="" placeholder="Password" name="password">
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
-                                                <div class="col-12">
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                                                        <label class="custom-control-label" for="remember">
-                                                        Remember me</label>
-                                                    </div>
-                                                </div>
-                                            </div>
                                             <div class="form-group text-center row m-t-20">
                                                 <div class="col-12">
                                                     <button class="btn btn-primary btn-block waves-effect waves-light" type="submit">

@@ -3,13 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use DB;
-use App\User;
-use App\Transaction;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class TransactionController extends Controller
+class ReportController extends Controller
 {
+
     /**
      * Create a new controller instance.
      *
@@ -27,11 +26,12 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $transaction = DB::table('transactions')
-            ->join('users', 'transactions.user_id', '=', 'users.id')
-            ->select('users.name', 'transactions.*')
+        // $courier = Courier::all();
+        $users = DB::table('transactions')
+            ->select(DB::raw('count(id) AS total'), DB::raw('YEAR(timeout) AS tahun'), DB::raw('MONTHNAME(timeout) AS bulan'))
+            ->groupBy('tahun','bulan')
             ->get();
-        return view('auth-admin.transaction.index',compact('transaction','user'));
+        return view('auth-admin.report.index',compact('users'));
     }
 
     /**
@@ -41,7 +41,7 @@ class TransactionController extends Controller
      */
     public function create()
     {
-        //
+        return view('auth-admin.courier.create');
     }
 
     /**
@@ -52,16 +52,19 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $courier = new Courier;
+        $courier->courier = $request->courier;
+        $courier->save();
+        return redirect()->route('courier.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Transaction  $transaction
+     * @param  \App\Courier  $courier
      * @return \Illuminate\Http\Response
      */
-    public function show(Transaction $transaction)
+    public function show(Courier $courier)
     {
         //
     }
@@ -69,34 +72,39 @@ class TransactionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Transaction  $transaction
+     * @param  \App\Courier  $courier
      * @return \Illuminate\Http\Response
      */
-    public function edit(Transaction $transaction)
+    public function edit($id)
     {
-        //
+        $courier = Courier::find($id);
+        return view('auth-admin.courier.edit', compact('courier'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Transaction  $transaction
+     * @param  \App\Courier  $courier
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Transaction $transaction)
+    public function update(Request $request, $id)
     {
-        //
+        $courier = Courier::find($id);
+        $courier->courier = $request->courier;
+        $courier->save();
+        return redirect()->route('courier.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Transaction  $transaction
+     * @param  \App\Courier  $courier
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Transaction $transaction)
+    public function destroy($id)
     {
-        //
+        Courier::find($id)->delete();
+        return redirect()->route('courier.index');
     }
 }

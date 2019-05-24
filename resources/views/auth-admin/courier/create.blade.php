@@ -10,19 +10,14 @@
 				<div class="float-right page-breadcrumb">
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item">
-							<a href="#">
-							Drixo</a>
+							<a href="/admin">
+							Home</a>
 						</li>
-						<li class="breadcrumb-item">
-							<a href="#">
-							Forms</a>
-						</li>
-						<li class="breadcrumb-item active">
-						Form Elements</li>
+						<li class="breadcrumb-item active">Courier</li>
 					</ol>
 				</div>
 				<h5 class="page-title">
-				Form Elements</h5>
+				Courier</h5>
 			</div>
 		</div>
 		<!-- end row -->
@@ -31,15 +26,7 @@
 				<div class="card m-b-30">
 					<div class="card-body">
 						<h4 class="mt-0 header-title">
-						Textual inputs</h4>
-						<p class="text-muted m-b-30 font-14">
-							Here are examples of <code class="highlighter-rouge">
-							.form-control</code>
-							applied to each textual HTML5 <code class="highlighter-rouge">
-							&lt;input&gt;</code>
-							<code class="highlighter-rouge">
-							type</code>
-						.</p>
+						Insert Courier</h4>
 						<form action="{{ route('courier.store') }}" method="POST">
 							{{ csrf_field() }}
 							<div class="form-group">
@@ -48,9 +35,9 @@
 							</div>
 							<div class="form-group">
 								<div>
-									<button type="submit" class="btn btn-success waves-effect waves-light">
+									<button type="submit" class="btn btn-primary waves-effect waves-light">
 									Simpan</button>
-									<button type="reset" class="btn btn-warning waves-effect m-l-5">
+									<button type="reset" class="btn btn-secondary waves-effect m-l-5">
 									Cancel</button>
 								</div>
 							</div>

@@ -9,15 +9,10 @@
 				<div class="float-right page-breadcrumb">
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item">
-							<a href="#">
-							Drixo</a>
+							<a href="/admin">
+							Home</a>
 						</li>
-						<li class="breadcrumb-item">
-							<a href="#">
-							Tables</a>
-						</li>
-						<li class="breadcrumb-item active">
-						Datatable</li>
+						<li class="breadcrumb-item active">Kategori Produk</li>
 					</ol>
 				</div>
 				<h5 class="page-title">
@@ -40,7 +35,7 @@
 								<tr>
 									<th width="5%"><center>No</center></th>
 									<th><center>Nama Kategori Produk</center></th>
-									<th width="11%"><center>Aksi</center></th>
+									<th width="12%"><center>Aksi</center></th>
 								</tr>
 							</thead>
 							<tbody>

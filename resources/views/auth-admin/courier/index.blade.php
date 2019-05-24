@@ -10,19 +10,14 @@
 				<div class="float-right page-breadcrumb">
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item">
-							<a href="#">
-							Drixo</a>
+							<a href="/admin">
+							Home</a>
 						</li>
-						<li class="breadcrumb-item">
-							<a href="#">
-							Tables</a>
-						</li>
-						<li class="breadcrumb-item active">
-						Datatable</li>
+						<li class="breadcrumb-item active">Courier</li>
 					</ol>
 				</div>
 				<h5 class="page-title">
-				Kategori Produk</h5>
+				Courier</h5>
 			</div>
 		</div>
 		<!-- end row -->
@@ -31,7 +26,7 @@
 				<div class="card m-b-30">
 					<div class="card-body">
 						<h4 class="mt-0 header-title">
-						Daftar Kategori Produk</h4>
+						Daftar Courier</h4>
 						<br><div class="button-items">
 							<a class="btn btn-success" href="/admin/courier/create" role="button">
 							Tambah Data</a>

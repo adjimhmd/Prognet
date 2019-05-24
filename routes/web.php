@@ -29,7 +29,9 @@ Route::prefix('admin')->group(function() {
 	Route::resource('/product_categories', 'Admin\ProductCategoriesController');
 	Route::resource('/product', 'Admin\ProductController');
 	Route::resource('/courier', 'Admin\CourierController');
-	Route::resource('/transaction', 'Admin\TransactionController@index');
+	Route::resource('/transaction', 'Admin\TransactionController');
 	Route::get('/gambar', 'Admin\ProductController@gambar');
 	Route::post('/gambar', 'Admin\ProductController@gambarUpload');
+	Route::delete('/gambar/hapus/{id}', 'Admin\ProductController@destroyGambar')->name('gambar.destroy');
+	Route::resource('/report', 'Admin\ReportController');
 });

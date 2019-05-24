@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use DB;
+use File;
 use App\Product;
 use App\ProductImage;
 use App\ProductCategories;
@@ -83,30 +84,29 @@ class ProductController extends Controller
         }
 
         $this->validate($request, [
-                'gambar' => 'required',
-                'gambar.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+                'image_name' => 'required',
+                'image_name.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
 
         ]);
         
-        if($request->hasfile('gambar'))
+        if($request->hasfile('image_name'))
          {
-            $no = 1;
-            foreach($request->file('gambar') as $image)
+            $i = 1;
+            foreach($request->file('image_name') as $image)
             {
                 $tambah = new ProductImage();
-                // Disini proses mendapatkan judul dan memindahkan letak gambar ke folder image
                 $file       = $image;
-                $fileName   = $no++."-".time().".".$file->getClientOriginalExtension();
-                $profile_image_url = 'profile_images/produk/' . $fileName;
-                $image->move('profile_images/produk/', $fileName);
+                $fileName   = $i.time().".".$file->getClientOriginalExtension();
+                $image->move('images/product/', $fileName);
                 $tambah->product_id = $id_product;
+                $profile_image_url = 'images/product/' . $fileName;
                 $tambah->image_name = $profile_image_url;
                 $tambah->save();
-
+                $i += 1;
             }
 
          }
-        return redirect()->route('auth-admin.product.index');
+        return redirect()->route('product.index');
     }
 
     /**
@@ -119,7 +119,7 @@ class ProductController extends Controller
     {
         $product = Product::where('id', $id)->first();
         // $product_category_details = App\ProductCategoryDetail::where('product_id', $id)->first();
-        $product_images = ProductImage::where('product_id', $id)->first();
+        $product_images = ProductImage::where('product_id', $id)->get();
         $product_category_details = DB::table('product_category_details')
             ->where('product_category_details.product_id', $id)
             ->join('product_categories', 'product_category_details.category_id', '=', 'product_categories.id')
@@ -157,6 +157,8 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        
         Product::where('id', $id)->update([
             'product_name' => $request->product_name,
             'price' => $request->price,
@@ -165,38 +167,38 @@ class ProductController extends Controller
             'weight' => $request->weight,
         ]);
 
-        $id_product = $product->id;
-        DB::table('product_category_details')->where('product_id', $id)->update([
-            'product_id' => $id_product,
-            'category_id' => $request->id_category,
-            'updated_at' => \Carbon\Carbon::now(),
-        ]);
+        $id_product = $id;
+        $loop = $request->get('category_id');
+        foreach ($loop as $value){
+            DB::table('product_category_details')->where('product_id', $id)->update([
+                'product_id' => $id_product,
+                'category_id' => $value,
+                'updated_at' => \Carbon\Carbon::now(),
+            ]);
+        }
+        
+
 
         $this->validate($request, [
-                'gambar' => 'required',
-                'gambar.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+                'image_name' => 'required',
+                'image_name.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
 
         ]);
-        
-        // if($request->hasfile('gambar'))
-        //  {
-        //     Flight::where('active', 0)->delete();
-        //     $no = 1;
-        //     foreach($request->file('gambar') as $image)
-        //     {
-        //         $tambah = new ProductImage();
-        //         // Disini proses mendapatkan judul dan memindahkan letak gambar ke folder image
-        //         $file = $image;
-        //         $fileNames = $file->getClientOriginalName();
-        //         $fileName = pathinfo($fileNames, PATHINFO_FILENAME);
-        //         $profile_image_url = 'profile_images/produk/' . $fileName;
-        //         $image->move('profile_images/produk/', $fileName);
-        //         $tambah->product_id = $id_product;
-        //         $tambah->image_name = $profile_image_url;
-        //         $tambah->save();
-        //     }
+         if($request->hasfile('image_name'))
+         {
+            foreach($request->file('image_name') as $image)
+            {
+                $tambah = new ProductImage();
+                $file       = $image;
+                $fileName   = time().".".$file->getClientOriginalExtension();
+                $image->move('images/product/', $fileName);
+                $tambah->product_id = $id_product;
+                $profile_image_url = 'images/product/' . $fileName;
+                $tambah->image_name = $profile_image_url;
+                $tambah->save();
 
-        //  }
+            }
+         }
         return redirect()->route('product.index');
     }
 
@@ -209,14 +211,22 @@ class ProductController extends Controller
     public function destroy($id)
     {
         DB::table('product_category_details')->where('product_id', '=', $id)->delete();
-        DB::table('product_images')->where('product_id', '=', $id)->delete();
         Product::find($id)->delete();
         return redirect()->route('product.index');
     }
 
-    public function gambar()
+    public function destroyGambar($id)
     {
-        return view('auth-admin.product.gambar');
+        $hapus = ProductImage::where('id', $id)
+            ->select('image_name')
+            ->get();
+        foreach ($hapus as $hps) {
+            File::delete($hps);
+        }
+
+        $image = ProductImage::find($id);
+        $image->delete();
+        return redirect()->back();
     }
 
     public function gambarUpload(Request $request)
